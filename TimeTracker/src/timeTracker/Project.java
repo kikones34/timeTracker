@@ -1,142 +1,51 @@
 package timeTracker;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 
-public class Project {
 
-	/**
-	 * @uml.property  name="tasks"
-	 */
-	private List<Task> tasks;
-	
-	/**
-	 */
-	public Project() {
-		this.tasks = new ArrayList<Task>();
-		this.name = "(no name)";
+public class Project extends Work {
+
+	@Override
+	public long getTotalTime() {
+		long totalTime = 0L;
+		for (Work work : works) {
+			totalTime += work.getTotalTime();
+		}
+		return totalTime;
 	}
 	
-	/**
-	 */
+	public Project(String name, String description) {
+		super(name, description);
+	}
+	
 	public Project(String name) {
-		this();
-		this.name = name;
+		super(name);
+	}
+	
+	public Project() {
+		super();
 	}
 
-	/**
-	 * Getter of the property <tt>tasks</tt>
-	 * @return  Returns the tasks.
-	 * @uml.property  name="tasks"
+	/** 
+	 * @uml.property name="works"
+	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="composite" inverse="project:timeTracker.Work"
 	 */
-	public List<Task> getTasks() {
-		return tasks;
-	}
+	private List<Work> works;
 
-	/**
-	 * @uml.property  name="subprojects"
+	/** 
+	 * Getter of the property <tt>works</tt>
+	 * @return  Returns the works.
+	 * @uml.property  name="works"
 	 */
-	private List<Project> subprojects;
-
-	/**
-	 * Getter of the property <tt>subprojects</tt>
-	 * @return  Returns the subprojects.
-	 * @uml.property  name="subprojects"
-	 */
-	public List<Project> getSubprojects() {
-		return subprojects;
+	public List<Work> getWorks() {
+		return works;
 	}
 
 		
 	/**
 	 */
-	public long getTotalTime() {
-		return 0;
+	public void addWork(Work work) {
+		works.add(work);
 	}
-
-	/**
-	 * @uml.property  name="name"
-	 */
-	private String name;
-
-	/**
-	 * Getter of the property <tt>name</tt>
-	 * @return  Returns the name.
-	 * @uml.property  name="name"
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Setter of the property <tt>name</tt>
-	 * @param name  The name to set.
-	 * @uml.property  name="name"
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	
-	/**
-	 */
-	public void addTask(Task task) {
-		this.tasks.add(task);
-	}
-
-			
-	/**
-	 */
-	public void addSubproject(Project project) {
-		this.subprojects.add(project);
-	}
-
-	/**
-	 * @uml.property  name="task"
-	 * @uml.associationEnd  inverse="project:timeTracker.Task"
-	 */
-	private Task task;
-
-	/**
-	 * Getter of the property <tt>task</tt>
-	 * @return  Returns the task.
-	 * @uml.property  name="task"
-	 */
-	public Task getTask() {
-		return task;
-	}
-
-	/**
-	 * Setter of the property <tt>task</tt>
-	 * @param task  The task to set.
-	 * @uml.property  name="task"
-	 */
-	public void setTask(Task task) {
-		this.task = task;
-	}
-
-	/**
-	 * @uml.property  name="task1"
-	 * @uml.associationEnd  inverse="project1:timeTracker.Task"
-	 */
-	private Task task1;
-
-	/**
-	 * Getter of the property <tt>task1</tt>
-	 * @return  Returns the task1.
-	 * @uml.property  name="task1"
-	 */
-	public Task getTask1() {
-		return task1;
-	}
-
-	/**
-	 * Setter of the property <tt>task1</tt>
-	 * @param task1  The task1 to set.
-	 * @uml.property  name="task1"
-	 */
-	public void setTask1(Task task1) {
-		this.task1 = task1;
-	}
-
 }

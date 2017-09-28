@@ -6,7 +6,7 @@ public class Timer {
 	/**
 	 * @uml.property  name="timeUnit"
 	 */
-	private long timeUnit;
+	private long timeUnit = 1000;
 
 	/**
 	 * Getter of the property <tt>timeUnit</tt>
@@ -27,15 +27,15 @@ public class Timer {
 	}
 
 		
-		/**
-		 */
-		public void start(){
-		}
+	/**
+	 */
+	public void start(){
+	}
 
 			
-			/**
-			 */
-			public void stop(){
-			}
+	/**
+	 */
+	public void stop(){
+	}
 
 }

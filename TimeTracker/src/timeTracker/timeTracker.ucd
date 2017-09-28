@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="838,458" id="timeTracker" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D313030302054696D65547261636B65722F415242">
-  <children xsi:type="editmodel:ClassEditModel" name="Client" location="330,75" size="79,67" id="timeTracker/Client" runTimeClassModel="main([Ljava.lang.String;)">
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" size="794,460" id="timeTracker" metadata="uml2-1.0" initialized="true" scrolledY="44" tag="1000" key="32303037303533312D313030302054696D65547261636B65722F415242">
+  <children xsi:type="editmodel:ClassEditModel" name="Client" location="615,132" size="79,67" id="timeTracker/Client" runTimeClassModel="main([Ljava.lang.String;)">
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <children xsi:type="editmodel:CompartmentEditModel" size="52,18">
       <children xsi:type="editmodel:MethodEditModel" name="main" id="timeTracker/Client#main([Ljava.lang.String;)"/>
@@ -8,36 +8,7 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Project" location="585,183" size="167,193" id="timeTracker/Project" runTimeClassModel="subprojects,Project(Ljava.lang.String;),addTask(LtimeTracker.Task;),Project(),name,getTotalTime(),addSubproject(LtimeTracker.Project;),tasks">
-    <children xsi:type="editmodel:CompartmentEditModel" size="144,54">
-      <children xsi:type="editmodel:AttributeEditModel" name="tasks" location="24,17" id="timeTracker/Project#tasks"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="subprojects" id="timeTracker/Project#subprojects"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="name" id="timeTracker/Project#name"/>
-    </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="100,90">
-      <children xsi:type="editmodel:MethodEditModel" name="getTotalTime" id="timeTracker/Project#getTotalTime()"/>
-      <children xsi:type="editmodel:MethodEditModel" name="addTask" id="timeTracker/Project#addTask(LtimeTracker.Task;)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="addSubproject" id="timeTracker/Project#addSubproject(LtimeTracker.Project;)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="Project" id="timeTracker/Project#Project(Ljava.lang.String;)"/>
-      <children xsi:type="editmodel:MethodEditModel" name="Project" id="timeTracker/Project#Project()"/>
-    </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
-  </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Task" location="375,210" size="159,139" id="timeTracker/Task" runTimeClassModel="maxTime,intervals,automaticStartTime,name,getTotalTime()">
-    <children xsi:type="editmodel:CompartmentEditModel" size="136,72">
-      <children xsi:type="editmodel:AttributeEditModel" name="intervals" location="22,31" id="timeTracker/Task#intervals"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="name" id="timeTracker/Task#name"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="maxTime" id="timeTracker/Task#maxTime"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="automaticStartTime" id="timeTracker/Task#automaticStartTime"/>
-    </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="89,18">
-      <children xsi:type="editmodel:MethodEditModel" name="getTotalTime" id="timeTracker/Task#getTotalTime()"/>
-    </children>
-    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
-    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
-  </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Timer" location="45,228" size="105,103" id="timeTracker/Timer" runTimeClassModel="stop(),start(),timeUnit">
+  <children xsi:type="editmodel:ClassEditModel" name="Timer" location="602,231" size="105,103" id="timeTracker/Timer" runTimeClassModel="stop(),start(),timeUnit">
     <children xsi:type="editmodel:CompartmentEditModel" size="82,18">
       <children xsi:type="editmodel:AttributeEditModel" name="timeUnit" id="timeTracker/Timer#timeUnit"/>
     </children>
@@ -48,10 +19,10 @@
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
-  <children xsi:type="editmodel:ClassEditModel" name="Interval" location="180,210" size="130,139" id="timeTracker/Interval" runTimeClassModel="startingTime,finishingTime,getTotalTime(),startTimer(),stopTimer()">
-    <children xsi:type="editmodel:CompartmentEditModel" size="107,36">
-      <children xsi:type="editmodel:AttributeEditModel" name="startingTime" id="timeTracker/Interval#startingTime"/>
-      <children xsi:type="editmodel:AttributeEditModel" name="finishingTime" id="timeTracker/Interval#finishingTime"/>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.5/@sourceConnections.1" name="Interval" location="30,60" size="112,139" id="timeTracker/Interval" runTimeClassModel="startTime,getTotalTime(),endTime,stopTimer(),startTimer()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="89,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="startTime" id="timeTracker/Interval#startTime"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="endTime" id="timeTracker/Interval#endTime"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="89,54">
       <children xsi:type="editmodel:MethodEditModel" name="getTotalTime" id="timeTracker/Interval#getTotalTime()"/>
@@ -59,6 +30,75 @@
       <children xsi:type="editmodel:MethodEditModel" name="stopTimer" id="timeTracker/Interval#stopTimer()"/>
     </children>
     <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.4/@sourceConnections.1 //@children.4/@sourceConnections.0" name="Work" location="300,15" size="129,193" id="timeTracker/Work" runTimeClassModel="endDate,Work(Ljava.lang.String;Ljava.lang.String;),Work(),Work(Ljava.lang.String;),name,description,getTotalTime(),startDate">
+    <children xsi:type="editmodel:CompartmentEditModel" size="106,72">
+      <children xsi:type="editmodel:AttributeEditModel" name="description" id="timeTracker/Work#description"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="endDate" id="timeTracker/Work#endDate"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" id="timeTracker/Work#name"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="startDate" id="timeTracker/Work#startDate"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="89,72">
+      <children xsi:type="editmodel:MethodEditModel" name="getTotalTime" id="timeTracker/Work#getTotalTime()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Work" id="timeTracker/Work#Work(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Work" id="timeTracker/Work#Work()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Work" id="timeTracker/Work#Work(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Project" location="390,319" size="112,121" id="timeTracker/Project" runTimeClassModel="Project(Ljava.lang.String;Ljava.lang.String;),Project(Ljava.lang.String;),Project(),getTotalTime()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="89,72">
+      <children xsi:type="editmodel:MethodEditModel" name="getTotalTime" id="timeTracker/Project#getTotalTime()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Project" id="timeTracker/Project#Project()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Project" id="timeTracker/Project#Project(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Project" id="timeTracker/Project#Project(Ljava.lang.String;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="timeTracker/Work@works+timeTracker/Project@project" source="//@children.4" target="//@children.3" targetEnd="//@children.4/@sourceConnections.0/@children.1" label="//@children.4/@sourceConnections.0/@children.2" sourceEnd="//@children.4/@sourceConnections.0/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="project" location="110,56" id="timeTracker/Work@works+timeTracker/Project@project|timeTracker/Project#project" attachSource="true" multiplicityLabel="//@children.4/@sourceConnections.0/@children.0/@children.1" roleLabel="//@children.4/@sourceConnections.0/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - project" location="509,382" size="43,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="509,354" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="works" location="129,94" id="timeTracker/Work@works+timeTracker/Project@project|timeTracker/Work#works" multiplicityLabel="//@children.4/@sourceConnections.0/@children.1/@children.2" roleLabel="//@children.4/@sourceConnections.0/@children.1/@children.1" orderingLabel="//@children.4/@sourceConnections.0/@children.1/@children.0" aggregationKind="Composition" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="436,116" size="34,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name=" - works" location="436,88" size="41,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="436,130" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.5/@sourceConnections.0" id="timeTracker/Work&lt;-timeTracker/Project" source="//@children.4" target="//@children.3" targetEnd="//@children.4/@sourceConnections.1/@children.1" sourceEnd="//@children.4/@sourceConnections.1/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="54,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="64,191" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="Task" location="210,319" size="112,121" id="timeTracker/Task" runTimeClassModel="Task(Ljava.lang.String;),Task(Ljava.lang.String;Ljava.lang.String;),Task(),getTotalTime()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="89,72">
+      <children xsi:type="editmodel:MethodEditModel" name="Task" id="timeTracker/Task#Task(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Task" id="timeTracker/Task#Task(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="Task" id="timeTracker/Task#Task()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getTotalTime" id="timeTracker/Task#getTotalTime()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" id="timeTracker/Work&lt;-timeTracker/Task" source="//@children.5" target="//@children.4/@sourceConnections.1" targetEnd="//@children.5/@sourceConnections.0/@children.1" sourceEnd="//@children.5/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="54,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,71"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="timeTracker/Interval@intervals+timeTracker/Task@task" source="//@children.5" target="//@children.2" targetEnd="//@children.5/@sourceConnections.1/@children.1" label="//@children.5/@sourceConnections.1/@children.2" sourceEnd="//@children.5/@sourceConnections.1/@children.0" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" name="task" location="0,10" id="timeTracker/Interval@intervals+timeTracker/Task@task|timeTracker/Task#task" attachSource="true" multiplicityLabel="//@children.5/@sourceConnections.1/@children.0/@children.1" roleLabel="//@children.5/@sourceConnections.1/@children.0/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - task" location="173,336" size="30,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="0..1" location="185,308" size="18,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="intervals" location="102,139" id="timeTracker/Interval@intervals+timeTracker/Task@task|timeTracker/Interval#intervals" multiplicityLabel="//@children.5/@sourceConnections.1/@children.1/@children.1" roleLabel="//@children.5/@sourceConnections.1/@children.1/@children.0" aggregationKind="Composition" navigable="true" orderingKind="1">
+        <children xsi:type="editmodel:LabelEditModel" name=" - intervals" location="74,206" size="51,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="139,206" size="4,14" anchorKind="LastPart"/>
+      </children>
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+    </sourceConnections>
     <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
   </children>
   <diagramOptions xsi:type="options:ClassDiagramOptions" properties="wireOptions=1;Product=eUML2" autoName="false"/>
