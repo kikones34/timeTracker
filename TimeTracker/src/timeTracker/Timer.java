@@ -1,7 +1,9 @@
 package timeTracker;
 
+import java.util.GregorianCalendar;
+import java.util.Observable;
 
-public class Timer {
+public class Timer extends Observable {
 
 	/**
 	 * @uml.property  name="timeUnit"
@@ -26,16 +28,23 @@ public class Timer {
 		this.timeUnit = timeUnit;
 	}
 
-		
-	/**
-	 */
-	public void start(){
-	}
-
-			
-	/**
-	 */
-	public void stop(){
+	public Timer() {
+		Thread t = new Thread() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						Thread.sleep(timeUnit);
+						setChanged();
+						notifyObservers(new GregorianCalendar());
+					} catch (InterruptedException e) {
+						System.out.println("Timer thread was interrupted.");
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		t.start();
 	}
 
 }

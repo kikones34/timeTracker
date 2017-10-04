@@ -1,25 +1,40 @@
 package timeTracker;
 
+import java.util.Calendar;
+import java.util.Observable;
+import java.util.Observer;
 
-public class Interval {
+
+public class Interval implements Observer {
+	
+	
+		/**
+		 * @uml.property  name="timer"
+		 */
+		public static Timer timer = new Timer();
+		
+		public Interval(Task task) {
+			this.task = task;
+		}
+
+		/**
+		 */
+		public long getTotalTime() {
+			// TODO
+			return 0;
+		}
+
+		/**
+		 */
+		public void start() {
+			Interval.timer.addObserver(this);
+		}
 
 		
 		/**
 		 */
-		public long getTotalTime() {
-			return endTime - startTime;
-		}
-
-		/**
-		 */
-		public void startTimer(){
-			timer.start();
-		}
-
-				
-		/**
-		 */
-		public void stopTimer(){
+		public void stop() {
+			Interval.timer.deleteObserver(this);
 		}
 
 		/** 
@@ -49,14 +64,14 @@ public class Interval {
 		/**
 		 * @uml.property  name="startTime"
 		 */
-		private long startTime;
+		private Calendar startTime;
 
 		/** 
 		 * Getter of the property <tt>start</tt>
 		 * @return  Returns the start.
 		 * @uml.property  name="startTime"
 		 */
-		public long getStartTime() {
+		public Calendar getStartTime() {
 			return startTime;
 		}
 
@@ -65,21 +80,21 @@ public class Interval {
 		 * @param start  The start to set.
 		 * @uml.property  name="startTime"
 		 */
-		public void setStartTime(long startTime) {
+		public void setStartTime(Calendar startTime) {
 			this.startTime = startTime;
 		}
 
 		/**
 		 * @uml.property  name="endTime"
 		 */
-		private long endTime;
+		private Calendar endTime;
 
 		/** 
 		 * Getter of the property <tt>finish</tt>
 		 * @return  Returns the finish.
 		 * @uml.property  name="endTime"
 		 */
-		public long getEndTime() {
+		public Calendar getEndTime() {
 			return endTime;
 		}
 
@@ -88,31 +103,17 @@ public class Interval {
 		 * @param finish  The finish to set.
 		 * @uml.property  name="endTime"
 		 */
-		public void setEndTime(long endTime) {
+		public void setEndTime(Calendar endTime) {
 			this.endTime = endTime;
 		}
 
-		/**
-		 * @uml.property  name="timer"
-		 */
-		private Timer timer;
-
-		/**
-		 * Getter of the property <tt>timer</tt>
-		 * @return  Returns the timer.
-		 * @uml.property  name="timer"
-		 */
-		public Timer getTimer() {
-			return timer;
-		}
-
-		/**
-		 * Setter of the property <tt>timer</tt>
-		 * @param timer  The timer to set.
-		 * @uml.property  name="timer"
-		 */
-		public void setTimer(Timer timer) {
-			this.timer = timer;
+		@Override
+		public void update(Observable o, Object calendarObj) {
+			// XXX: is this cast acceptable?
+			Calendar calendar = (Calendar)calendarObj;
+			endTime = calendar;
+			System.out.println("Interval: " + calendar.getTime());
+			task.update(calendar);
 		}
 
 }

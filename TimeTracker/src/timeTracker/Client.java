@@ -1,8 +1,12 @@
 package timeTracker;
 
-
 public class Client {
+
+	/**
+	 * @throws InterruptedException 
+	 */
 	public static void main(String[] args) throws InterruptedException {
+		
 		Project root = new Project();
 		Project project1 = new Project("Test project");
 		Task task1 = new Task("Task of project 1");
@@ -13,8 +17,9 @@ public class Client {
 		project1.addWork(task1);
 		project1.addWork(task2);
 		
-		task3.start();
-		Thread.sleep(4000);
-		task3.stop();
+		task1.start();
+		Thread.sleep(10000);
+		task1.stop();
 	}
+
 }

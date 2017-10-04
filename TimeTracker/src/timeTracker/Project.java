@@ -1,7 +1,6 @@
 package timeTracker;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
-
 
 public class Project extends Work {
 
@@ -46,6 +45,17 @@ public class Project extends Work {
 	 */
 	public void addWork(Work work) {
 		works.add(work);
+		work.setProject(this);
+	}
+
+	@Override
+	protected void initialize() {
+		works = new ArrayList<Work>();
+	}
+	
+	@Override
+	public void display() {
+		System.out.println("Project: " + getEndDate().getTime());
 	}
 	
 }
