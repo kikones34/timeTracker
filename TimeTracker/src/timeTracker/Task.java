@@ -1,13 +1,36 @@
 package timeTracker;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-public class Task extends Work {
+/**
+ * @uml.dependency   supplier="timeTracker.Timer"
+ */
+public class Task extends Work implements Visitable {
 	
-	/** 
-	 * @uml.property name="intervals"
-	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" aggregation="composite" inverse="task:timeTracker.Interval"
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3L;
+	private Interval activeInterval = null;
+
+	public Interval getActiveInterval() {
+		return activeInterval;
+	}
+	
+	public void setActiveInterval(Interval activeInterval) {
+		this.activeInterval = activeInterval;
+	}
+
+	@Override
+	public void acceptVisitor(Visitor visitor) {
+		visitor.visit(this);
+	}
+	
+	/**
+	 * @uml.property   name="intervals"
+	 * @uml.associationEnd   multiplicity="(0 -1)" ordering="true" aggregation="composite" inverse="task:timeTracker.Interval"
 	 */
 	private List<Interval> intervals;
 
@@ -18,15 +41,6 @@ public class Task extends Work {
 	 */
 	public List<Interval> getIntervals() {
 		return intervals;
-	}
-
-	@Override
-	public long getTotalTime() {
-		long totalTime = 0L;
-		for (Interval interval : intervals) {
-			totalTime += interval.getTotalTime();
-		}
-		return totalTime;
 	}
 	
 	public Task(String name, String description) {
@@ -45,28 +59,41 @@ public class Task extends Work {
 	/**
 	 */
 	public void start() {
-		Interval interval = new Interval(this);
-		intervals.add(interval);
-		interval.start();
+		if (activeInterval == null) {
+			activeInterval = new Interval(this);
+			intervals.add(activeInterval);
+			Timer.getInstance().addObserver(activeInterval);
+		}
 	}
 
 			
 	/**
 	 */
 	public void stop() {
-		intervals.get(intervals.size()-1).stop();
+		if (activeInterval != null) {
+			Timer.getInstance().deleteObserver(activeInterval);
+			Interval prevActiveInterval = activeInterval;
+			activeInterval = null;
+			prevActiveInterval.update(null, new GregorianCalendar());
+		}
 	}
 		
 	/**
 	 */
 	@Override
 	protected void initialize() {
+		Logging.getLogger().trace("" + (intervals == null));
 		intervals = new ArrayList<Interval>();
 	}
-
+	
 	@Override
-	public void display() {
-		System.out.println("Task: " + getEndDate().getTime());
+	public void updateDuration() {
+		long duration = 0L;
+		for (Interval interval: intervals) {
+			duration += interval.getDuration();
+		}
+		Logging.getLogger().debug("" + duration);
+		setDuration(duration);
 	}
 
 }

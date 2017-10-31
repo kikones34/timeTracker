@@ -1,10 +1,19 @@
 package timeTracker;
 
+import java.text.MessageFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.io.Serializable;
 
-public abstract class Work {
-
+/**
+ * Abstract class which represents a Task or a Project
+ */
+public abstract class Work implements Visitable, Serializable {
+		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		
 		/**
 		 * @uml.property  name="startDate"
@@ -102,15 +111,15 @@ public abstract class Work {
 		 * @uml.property name="project"
 		 * @uml.associationEnd inverse="works:timeTracker.Project"
 		 */
-		private Project project;
+		private Project parentProject;
 
 		/** 
 		 * Getter of the property <tt>project</tt>
 		 * @return  Returns the project.
 		 * @uml.property  name="project"
 		 */
-		public Project getProject() {
-			return project;
+		public Project getParentProject() {
+			return parentProject;
 		}
 
 		/** 
@@ -118,14 +127,9 @@ public abstract class Work {
 		 * @param project  The project to set.
 		 * @uml.property  name="project"
 		 */
-		public void setProject(Project project) {
-			this.project = project;
+		public void setParentProject(Project project) {
+			this.parentProject = project;
 		}
-			
-		/**
-		 */
-		public abstract long getTotalTime();
-
 		
 		public Work(String name, String description) {
 			this.name = name;
@@ -150,25 +154,66 @@ public abstract class Work {
 		
 		/**
 		 */
-		abstract void display();
+		public void display() {
+			if (parentProject != null) {
+				System.out.println(
+					MessageFormat.format(
+						"{0}\t{1}\t{2}\t{3}",
+						getName(),
+						DateFormatting.getFormatter().format(getStartDate().getTime()),
+						DateFormatting.getFormatter().format(getEndDate().getTime()),
+						TimeFormatter.format(getDuration())
+					)
+				);
+			}
+		}
+		
+		/**
+		 * 
+		 */
+		public abstract void updateDuration();
 		
 		/**
 		 */
-		// XXX: Client can call this, which makes no sense, but can't be protected or lower because Interval needs to call
 		public void update(Calendar endDate) {
 			setEndDate(endDate);
-			display();
+			updateDuration();
 			updateParent(endDate);
 		}
 
 		/**
 		 */
 		public void updateParent(Calendar endDate) {
-			if (project.getProject() != null) {
-				project.update(endDate);
+			if (this.getParentProject().getParentProject() != null) {
+				parentProject.update(endDate);
 			} else {
-				System.out.println("root reached.\n");
+				Logging.getLogger().info("root reached by " + getName());
+				parentProject.acceptVisitor(new DataPrinterVisitor());
+				System.out.println();
 			}
+		}
+
+		/**
+		 * @uml.property  name="duration"
+		 */
+		private long duration;
+
+		/**
+		 * Getter of the property <tt>duration</tt>
+		 * @return  Returns the duration.
+		 * @uml.property  name="duration"
+		 */
+		public long getDuration() {
+			return duration;
+		}
+
+		/**
+		 * Setter of the property <tt>duration</tt>
+		 * @param duration  The duration to set.
+		 * @uml.property  name="duration"
+		 */
+		public void setDuration(long duration) {
+			this.duration = duration;
 		}
 
 }

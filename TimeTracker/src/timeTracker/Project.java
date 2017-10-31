@@ -2,15 +2,16 @@ package timeTracker;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project extends Work {
+public class Project extends Work implements Visitable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2L;
 
 	@Override
-	public long getTotalTime() {
-		long totalTime = 0L;
-		for (Work work : works) {
-			totalTime += work.getTotalTime();
-		}
-		return totalTime;
+	public void acceptVisitor(Visitor visitor) {
+		visitor.visit(this);
 	}
 	
 	public Project(String name, String description) {
@@ -45,7 +46,7 @@ public class Project extends Work {
 	 */
 	public void addWork(Work work) {
 		works.add(work);
-		work.setProject(this);
+		work.setParentProject(this);
 	}
 
 	@Override
@@ -54,8 +55,12 @@ public class Project extends Work {
 	}
 	
 	@Override
-	public void display() {
-		System.out.println("Project: " + getEndDate().getTime());
+	public void updateDuration() {
+		long duration = 0L;
+		for (Work work: works) {
+			duration += work.getDuration();
+		}
+		setDuration(duration);
 	}
 	
 }

@@ -1,45 +1,37 @@
 package timeTracker;
 
+import java.io.Serializable;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
 
 
-public class Interval implements Observer {
-	
-	
-		/**
-		 * @uml.property  name="timer"
-		 */
-		public static Timer timer = new Timer();
+/**
+ * @uml.dependency   supplier="timeTracker.Timer"
+ */
+public class Interval implements Observer, Serializable {
 		
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		public Interval(Task task) {
 			this.task = task;
+			startTime = new GregorianCalendar();
 		}
 
 		/**
 		 */
-		public long getTotalTime() {
-			// TODO
-			return 0;
+		public long getDuration() {
+			long duration = this.endTime.getTimeInMillis() - this.startTime.getTimeInMillis();
+			return duration - duration % Timer.getTimeUnit();
 		}
 
 		/**
-		 */
-		public void start() {
-			Interval.timer.addObserver(this);
-		}
-
-		
-		/**
-		 */
-		public void stop() {
-			Interval.timer.deleteObserver(this);
-		}
-
-		/** 
-		 * @uml.property name="task"
-		 * @uml.associationEnd inverse="intervals:timeTracker.Task"
+		 * @uml.property   name="task"
+		 * @uml.associationEnd   inverse="intervals:timeTracker.Task"
 		 */
 		private Task task;
 
@@ -109,10 +101,9 @@ public class Interval implements Observer {
 
 		@Override
 		public void update(Observable o, Object calendarObj) {
-			// XXX: is this cast acceptable?
 			Calendar calendar = (Calendar)calendarObj;
 			endTime = calendar;
-			System.out.println("Interval: " + calendar.getTime());
+			Logging.getLogger().trace("Interval: " + calendar.getTime());
 			task.update(calendar);
 		}
 
