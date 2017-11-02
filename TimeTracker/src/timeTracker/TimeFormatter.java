@@ -1,9 +1,15 @@
 package timeTracker;
 
+// Provides functionality to format time.
+// Mustn't be instantiated, all methods are static.
 public class TimeFormatter {
+	
+	private TimeFormatter() {
+	}
+	
+	// prints the date as # years, # months, ..., # seconds
 	public static String formatFull(long millis) {
-		// length of periods in seconds
-		int[] periodDurations = {31536000, 2592000, 86400, 3600, 60, 1};
+		int[] periodDurations = {31536000, 2592000, 86400, 3600, 60, 1}; // in seconds
 		String[] periodNames = {"year", "month", "day", "hour", "minute", "second"};
 		
 		String date = "";
@@ -25,6 +31,7 @@ public class TimeFormatter {
 		return date.substring(0, date.length()-2);
 	}
 	
+	// prints the date as hh:mm:ss
 	public static String format(long millis) {
 		int totalSeconds = (int)(millis/1000L);
 		int hours = totalSeconds/3600;

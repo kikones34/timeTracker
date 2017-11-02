@@ -2,6 +2,8 @@ package timeTracker;
 
 import java.text.SimpleDateFormat;
 
+// Utility class which provides a simple interface to format dates.
+// Wraps a SimpleDateFormat object.
 public class DateFormatting {
 	private static SimpleDateFormat formatter = null;
 	private static String format = null;

@@ -3,6 +3,8 @@ package timeTracker;
 import java.util.GregorianCalendar;
 import java.util.Observable;
 
+// Singleton which creates a new thread and ticks (notifies all its observers)
+// periodically, with the period length indicated by timeUnit.
 public class Timer extends Observable {
 
 	/**
@@ -70,7 +72,7 @@ public class Timer extends Observable {
 						break;
 					}
 				}
-				System.out.println("Timer stopped.");
+				Logging.getLogger().info("Timer stopped.");
 			}
 		};
 		thread.start();

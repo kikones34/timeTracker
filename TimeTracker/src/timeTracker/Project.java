@@ -2,12 +2,10 @@ package timeTracker;
 import java.util.ArrayList;
 import java.util.List;
 
+// Represents a collection of tasks and/or sub-projects.
 public class Project extends Work implements Visitable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void acceptVisitor(Visitor visitor) {
@@ -50,7 +48,7 @@ public class Project extends Work implements Visitable {
 	}
 
 	@Override
-	protected void initialize() {
+	protected void initialise() {
 		works = new ArrayList<Work>();
 	}
 	

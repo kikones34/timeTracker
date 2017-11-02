@@ -1,16 +1,13 @@
 package timeTracker;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
-/**
- * @uml.dependency   supplier="timeTracker.Timer"
- */
+// Serves as the base class of any task decorator.
 public abstract class TaskDecorator extends Task {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5L;
+
+	private static final long serialVersionUID = 1L;
 	protected Task task;
 	
 	public TaskDecorator(Task task) {
@@ -31,13 +28,19 @@ public abstract class TaskDecorator extends Task {
 	public List<Interval> getIntervals() {
 		return task.getIntervals();
 	}
+	
+	@Override
+	public boolean isActive() {
+		return task.isActive();
+	}
 		
-	/**
-	 */
 	@Override
 	public void start() {
 		// XXX: we don't know how to avoid reimplementing this method
-		if (task.getActiveInterval() == null) {
+		if (!task.isActive()) {
+			if (task.getStartDate() == null) {
+				task.initialiseDates(new GregorianCalendar());
+			}
 			Interval activeInterval = new Interval(this);
 			task.setActiveInterval(activeInterval);
 			task.getIntervals().add(activeInterval);
@@ -45,20 +48,15 @@ public abstract class TaskDecorator extends Task {
 		}
 	}
 
-	/**
-	 */
 	@Override
 	public void stop() {
 		task.stop();
 	}
-		
-	/**
-	 */
+	
+	// this method must be overridden with an empty method because
+	// the TaskDecorator can't be initialised as if it were a Task.
 	@Override
-	protected void initialize() {
-		// this method must be overridden with an empty method
-		// because the TaskDecorator can't be initialized
-		// as if it were a Task.
+	protected void initialise() {
 	}
 	
 	@Override
@@ -132,8 +130,18 @@ public abstract class TaskDecorator extends Task {
 	}
 	
 	@Override
+	public boolean isRoot() {
+		return task.isRoot();
+	}
+	
+	@Override
 	public void display() {
 		task.display();
+	}
+	
+	@Override
+	public void initialiseDates(Calendar currentDate) {
+		task.initialiseDates(currentDate);
 	}
 	
 	@Override

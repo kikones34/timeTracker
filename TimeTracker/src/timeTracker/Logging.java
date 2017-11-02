@@ -4,6 +4,8 @@ import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 
+// Utility class which provides a simple interface for logging.
+// Wraps a Logger object.
 public final class Logging {
 	
 	private static Logger logger = null;

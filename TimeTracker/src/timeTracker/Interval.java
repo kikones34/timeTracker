@@ -6,51 +6,52 @@ import java.util.GregorianCalendar;
 import java.util.Observable;
 import java.util.Observer;
 
-
-/**
- * @uml.dependency   supplier="timeTracker.Timer"
- */
+// Represents a time interval. Must pertain to a task.
+// It indicates the intervals in which the task has been active.
 public class Interval implements Observer, Serializable {
 		
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 
-		public Interval(Task task) {
-			this.task = task;
+		public Interval(Task parentTask) {
+			this.parentTask = parentTask;
 			startTime = new GregorianCalendar();
 		}
 
-		/**
-		 */
+		// calculates the interval duration and rounds it to the nearest
+		// multiple of the minimum time unit specified by the Timer
 		public long getDuration() {
 			long duration = this.endTime.getTimeInMillis() - this.startTime.getTimeInMillis();
-			return duration - duration % Timer.getTimeUnit();
+			long mod = duration % Timer.getTimeUnit();
+			if (mod < Timer.getTimeUnit()/2) {
+				duration -= mod;
+			} else {
+				duration += Timer.getTimeUnit() - mod;
+			}
+			return duration;
 		}
 
 		/**
-		 * @uml.property   name="task"
+		 * @uml.property   name="parentTask"
 		 * @uml.associationEnd   inverse="intervals:timeTracker.Task"
 		 */
-		private Task task;
+		private Task parentTask;
 
 		/** 
-		 * Getter of the property <tt>task</tt>
-		 * @return  Returns the task.
-		 * @uml.property  name="task"
+		 * Getter of the property <tt>parentTask</tt>
+		 * @return  Returns the parentTask.
+		 * @uml.property  name="parentTask"
 		 */
-		public Task getTask() {
-			return task;
+		public Task getParentTask() {
+			return parentTask;
 		}
 
 		/** 
-		 * Setter of the property <tt>task</tt>
-		 * @param task  The task to set.
-		 * @uml.property  name="task"
+		 * Setter of the property <tt>parentTask</tt>
+		 * @param task  The parentTask to set.
+		 * @uml.property  name="parentTask"
 		 */
-		public void setTask(Task task) {
-			this.task = task;
+		public void setParentTask(Task parentTask) {
+			this.parentTask = parentTask;
 		}
 
 		/**
@@ -104,7 +105,7 @@ public class Interval implements Observer, Serializable {
 			Calendar calendar = (Calendar)calendarObj;
 			endTime = calendar;
 			Logging.getLogger().trace("Interval: " + calendar.getTime());
-			task.update(calendar);
+			parentTask.update(calendar);
 		}
 
 }

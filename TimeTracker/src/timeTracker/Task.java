@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-/**
- * @uml.dependency   supplier="timeTracker.Timer"
- */
+// Represents a task. Must pertain to a project (although, if it pertains to
+// the root project, the user will see it as not pertaining to any project).
+// It consists of a series of intervals, which indicate when it has been active.
 public class Task extends Work implements Visitable {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3L;
+	private static final long serialVersionUID = 1L;
 	private Interval activeInterval = null;
 
 	public Interval getActiveInterval() {
@@ -54,34 +51,37 @@ public class Task extends Work implements Visitable {
 	public Task() {
 		super();
 	}
-
-		
-	/**
-	 */
+	
+	public boolean isActive() {
+		return activeInterval != null;
+	}
+	
 	public void start() {
-		if (activeInterval == null) {
+		if (!isActive()) {
+			if (getStartDate() == null) {
+				Logging.getLogger().debug("dates initialised");
+				initialiseDates(new GregorianCalendar());
+			}
 			activeInterval = new Interval(this);
 			intervals.add(activeInterval);
 			Timer.getInstance().addObserver(activeInterval);
 		}
 	}
 
-			
-	/**
-	 */
 	public void stop() {
-		if (activeInterval != null) {
-			Timer.getInstance().deleteObserver(activeInterval);
+		if (isActive()) {
+			// we must set the active interval to null as soon as possible when
+			// stopping the task, because other functions which might be called
+			// in this method need to know that the task is stopped
 			Interval prevActiveInterval = activeInterval;
 			activeInterval = null;
-			prevActiveInterval.update(null, new GregorianCalendar());
+			
+			Timer.getInstance().deleteObserver(prevActiveInterval);
 		}
 	}
-		
-	/**
-	 */
+	
 	@Override
-	protected void initialize() {
+	protected void initialise() {
 		Logging.getLogger().trace("" + (intervals == null));
 		intervals = new ArrayList<Interval>();
 	}

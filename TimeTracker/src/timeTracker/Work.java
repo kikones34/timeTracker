@@ -2,23 +2,18 @@ package timeTracker;
 
 import java.text.MessageFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.io.Serializable;
 
-/**
- * Abstract class which represents a Task or a Project
- */
+// Represents a node in the project/task tree.
+// Serves as the base class for Project and Task.
 public abstract class Work implements Visitable, Serializable {
 		
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		
 		/**
 		 * @uml.property  name="startDate"
 		 */
-		private Calendar startDate;
+		private Calendar startDate = null;
 
 		/**
 		 * Getter of the property <tt>startDate</tt>
@@ -41,7 +36,7 @@ public abstract class Work implements Visitable, Serializable {
 		/**
 		 * @uml.property  name="endDate"
 		 */
-		private Calendar endDate;
+		private Calendar endDate = null;
 
 		/**
 		 * Getter of the property <tt>endDate</tt>
@@ -134,9 +129,7 @@ public abstract class Work implements Visitable, Serializable {
 		public Work(String name, String description) {
 			this.name = name;
 			this.description = description;
-			this.startDate = new GregorianCalendar();
-			this.endDate = new GregorianCalendar();
-			initialize();
+			initialise();
 		}
 		
 		public Work(String name) {
@@ -147,46 +140,55 @@ public abstract class Work implements Visitable, Serializable {
 			this("<no name>");
 		}
 
-			
-		/**
-		 */
-		protected abstract void initialize();
+		// gets called when constructing a new node
+		// must properly initialise all attributes specific to the node type
+		protected abstract void initialise();
 		
-		/**
-		 */
+		
+		public boolean isRoot() {
+			return parentProject == null;
+		}
+		
 		public void display() {
-			if (parentProject != null) {
-				System.out.println(
-					MessageFormat.format(
-						"{0}\t{1}\t{2}\t{3}",
-						getName(),
-						DateFormatting.getFormatter().format(getStartDate().getTime()),
-						DateFormatting.getFormatter().format(getEndDate().getTime()),
-						TimeFormatter.format(getDuration())
-					)
-				);
+			if (!isRoot()) {
+				if (getStartDate() != null) {
+					System.out.println(
+						MessageFormat.format(
+							"{0}\t{1}\t{2}\t{3}",
+							getName(),
+							DateFormatting.getFormatter().format(getStartDate().getTime()),
+							DateFormatting.getFormatter().format(getEndDate().getTime()),
+							TimeFormatter.format(getDuration())
+						)
+					);
+				} else {
+					System.out.println(getName());
+				}
 			}
 		}
 		
-		/**
-		 * 
-		 */
+		public void initialiseDates(Calendar currentDate) {
+			if (!isRoot()) {
+				setStartDate(currentDate);
+				setEndDate(currentDate);
+				getParentProject().initialiseDates(currentDate);
+			}
+		}
+
 		public abstract void updateDuration();
 		
-		/**
-		 */
+		// template method for updating a node
 		public void update(Calendar endDate) {
 			setEndDate(endDate);
 			updateDuration();
 			updateParent(endDate);
 		}
 
-		/**
-		 */
 		public void updateParent(Calendar endDate) {
-			if (this.getParentProject().getParentProject() != null) {
+			if (!this.getParentProject().isRoot()) {
 				parentProject.update(endDate);
 			} else {
+				// when the update chain reaches the root, the entire tree is printed
 				Logging.getLogger().info("root reached by " + getName());
 				parentProject.acceptVisitor(new DataPrinterVisitor());
 				System.out.println();

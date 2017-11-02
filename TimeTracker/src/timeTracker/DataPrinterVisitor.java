@@ -1,5 +1,6 @@
 package timeTracker;
 
+// A visitor which traverses the tree, printing each node in preorder
 public class DataPrinterVisitor implements Visitor {	
 
 	@Override
