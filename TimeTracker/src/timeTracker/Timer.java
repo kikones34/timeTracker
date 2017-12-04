@@ -1,17 +1,23 @@
-package timeTracker;
+package timetracker;
 
 import java.util.GregorianCalendar;
 import java.util.Observable;
 
+import utilities.Logging;
+
 // Singleton which creates a new thread and ticks (notifies all its observers)
 // periodically, with the period length indicated by timeUnit.
-public class Timer extends Observable {
+public final class Timer extends Observable {
+	
+	private static boolean invariant() {
+		return timeUnit > 0L;
+	}
 
 	/**
 	 * @uml.property  name="timeUnit"
 	 * Minimum time unit in milliseconds.
 	 */
-	private static long timeUnit = 1000;
+	private static long timeUnit = 1000L;
 	
 	/**
 	 * @uml.property  name="timer"
@@ -55,11 +61,16 @@ public class Timer extends Observable {
 	 * @param timeUnit  The timeUnit to set.
 	 * @uml.property  name="timeUnit"
 	 */
-	public static void setTimeUnit(long timeUnit) {
+	public static void setTimeUnit(final long timeUnit) {
+		assert invariant();
 		Timer.timeUnit = timeUnit;
+		assert invariant();
 	}
 
+
 	public void start() {
+		assert invariant();
+				
 		thread = new Thread() {
 			@Override
 			public void run() {
@@ -76,10 +87,14 @@ public class Timer extends Observable {
 			}
 		};
 		thread.start();
+		
+		assert invariant();
 	}
 
 	public void stop() {
+		assert invariant();
 		thread.interrupt();
+		assert invariant();
 	}
 
 

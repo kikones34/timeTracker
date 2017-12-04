@@ -1,22 +1,29 @@
-package timeTracker;
+package timetracker;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 // Represents a collection of tasks and/or sub-projects.
-public class Project extends Work implements Visitable {
+public class Project extends Work {
+	
+	protected boolean invariant() {		
+		return super.invariant() && works != null;
+	}
 	
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void acceptVisitor(Visitor visitor) {
+	public void acceptVisitor(final WorkTreeVisitor visitor) {
+		assert invariant();
 		visitor.visit(this);
+		assert invariant();
 	}
 	
-	public Project(String name, String description) {
+	public Project(final String name, final String description) {
 		super(name, description);
 	}
 	
-	public Project(String name) {
+	public Project(final String name) {
 		super(name);
 	}
 	
@@ -26,7 +33,7 @@ public class Project extends Work implements Visitable {
 
 	/** 
 	 * @uml.property name="works"
-	 * @uml.associationEnd multiplicity="(0 -1)" aggregation="composite" inverse="project:timeTracker.Work"
+	 * @uml.associationEnd multiplicity="(0 -1)" inverse="project1:timetracker.Work"
 	 */
 	private List<Work> works;
 
@@ -42,9 +49,11 @@ public class Project extends Work implements Visitable {
 		
 	/**
 	 */
-	public void addWork(Work work) {
+	public void addWork(final Work work) {
+		assert invariant();
 		works.add(work);
 		work.setParentProject(this);
+		assert invariant();
 	}
 
 	@Override
@@ -52,13 +61,38 @@ public class Project extends Work implements Visitable {
 		works = new ArrayList<Work>();
 	}
 	
+	// Calculates the duration of a project.
+	// A lower and upper bound for the dates can be specified.
+	// A null value represents the date is not bounded.
 	@Override
-	public void updateDuration() {
+	public long calculateDuration(final Calendar minDate,
+			final Calendar maxDate) {
+		assert invariant();
+		// precondition
+		if (minDate != null && maxDate != null) {
+			assert maxDate.after(minDate);
+		}
 		long duration = 0L;
 		for (Work work: works) {
-			duration += work.getDuration();
+			duration += work.calculateDuration(minDate, maxDate);
 		}
-		setDuration(duration);
+		//postcondition
+		assert duration >= 0L;
+		
+		assert invariant();
+		
+		return duration;
+	}
+	
+	public boolean hasBeenStarted() {
+		assert invariant();
+		for (Work work: works) {
+			if (work.hasBeenStarted()) {
+				return true;
+			}
+		}
+		assert invariant();
+		return false;
 	}
 	
 }

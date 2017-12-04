@@ -1,4 +1,4 @@
-package timeTracker;
+package utilities;
 
 import org.slf4j.LoggerFactory;
 import ch.qos.logback.classic.Level;
@@ -20,7 +20,7 @@ public final class Logging {
 		return logger;
 	}
 	
-	public void setLevel(Level level) {
+	public void setLevel(final Level level) {
 		logger.setLevel(level);
 	}
 	

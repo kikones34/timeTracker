@@ -1,16 +1,27 @@
-package timeTracker;
+package timetracker;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import utilities.Logging;
+
 // Serves as the base class of any task decorator.
 public abstract class TaskDecorator extends Task {
 
 	private static final long serialVersionUID = 1L;
-	protected Task task;
 	
-	public TaskDecorator(Task task) {
+	/**
+	 * @uml.property  name="task"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="taskDecorator:timetracker.Task"
+	 */
+	private Task task;
+	
+	protected Task getTask() {
+		return task;
+	}
+	
+	public TaskDecorator(final Task task) {
 		Logging.getLogger().trace("Inside TaskDecorator");
 		this.task = task;
 	}
@@ -20,7 +31,7 @@ public abstract class TaskDecorator extends Task {
 	 * =========================================================== */
 	
 	@Override
-	public void acceptVisitor(Visitor visitor) {
+	public void acceptVisitor(final WorkTreeVisitor visitor) {
 		visitor.visit(this);
 	}
 
@@ -70,7 +81,7 @@ public abstract class TaskDecorator extends Task {
 	}
 	
 	@Override
-	public void setActiveInterval(Interval activeInterval) {
+	public void setActiveInterval(final Interval activeInterval) {
 		task.setActiveInterval(activeInterval);
 	}
 
@@ -85,7 +96,7 @@ public abstract class TaskDecorator extends Task {
 	}
 
 	@Override
-	public void setStartDate(Calendar startDate) {
+	public void setStartDate(final Calendar startDate) {
 		task.setStartDate(startDate);
 	}
 
@@ -95,7 +106,7 @@ public abstract class TaskDecorator extends Task {
 	}
 
 	@Override
-	public void setEndDate(Calendar endDate) {
+	public void setEndDate(final Calendar endDate) {
 		task.setEndDate(endDate);
 	}
 
@@ -105,7 +116,7 @@ public abstract class TaskDecorator extends Task {
 	}
 
 	@Override
-	public void setName(String name) {
+	public void setName(final String name) {
 		task.setName(name);
 	}
 
@@ -115,7 +126,7 @@ public abstract class TaskDecorator extends Task {
 	}
 
 	@Override
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		task.setDescription(description);
 	}
 
@@ -125,7 +136,7 @@ public abstract class TaskDecorator extends Task {
 	}
 
 	@Override
-	public void setParentProject(Project project) {
+	public void setParentProject(final Project project) {
 		task.setParentProject(project);
 	}
 	
@@ -135,23 +146,18 @@ public abstract class TaskDecorator extends Task {
 	}
 	
 	@Override
-	public void display() {
-		task.display();
-	}
-	
-	@Override
-	public void initialiseDates(Calendar currentDate) {
+	public void initialiseDates(final Calendar currentDate) {
 		task.initialiseDates(currentDate);
 	}
 	
 	@Override
-	public void update(Calendar endDate) {
+	public void update(final Calendar endDate) {
 		Logging.getLogger().trace("Update task duration.");
 		task.update(endDate);
 	}
 
 	@Override
-	public void updateParent(Calendar endDate) {
+	public void updateParent(final Calendar endDate) {
 		task.updateParent(endDate);
 	}
 
@@ -161,8 +167,19 @@ public abstract class TaskDecorator extends Task {
 	}
 
 	@Override
-	public void setDuration(long duration) {
+	public void setDuration(final long duration) {
 		task.setDuration(duration);
+	}
+
+	@Override
+	public long calculateDuration(final Calendar minDate,
+			final Calendar maxDate) {
+		return task.calculateDuration(minDate, maxDate);
+	}
+	
+	@Override
+	public boolean hasBeenStarted() {
+		return task.hasBeenStarted();
 	}
 
 }
