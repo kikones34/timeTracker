@@ -94,5 +94,14 @@ public class Project extends Work {
 		assert invariant();
 		return false;
 	}
+
+	@Override
+	public void print() {
+		display();
+		for (Work work: works) {
+			work.print();
+		}
+	}
+
 	
 }

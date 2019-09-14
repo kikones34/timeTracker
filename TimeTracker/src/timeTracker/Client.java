@@ -35,7 +35,7 @@ public final class Client {
 		
 		// parameter that determines which test will be executed
 		//generateTestFita2Session();
-		int test = 6;
+		int test = 1;
 		boolean fullReport = true;
 		Formatter reportFormatter = new HtmlFormatter();
 		

@@ -1,9 +1,12 @@
 package timetracker;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
 import java.util.Calendar;
 
+import utilities.DateUtilities;
 import utilities.Logging;
+import utilities.TimeFormatter;
 
 // Represents a node in the project/task tree.
 // Serves as the base class for Project and Task.
@@ -218,11 +221,34 @@ public abstract class Work implements WorkTreeVisitable, Serializable {
 			// when the update chain reaches the root,
 			// the entire tree is printed
 			Logging.getLogger().info("root reached by " + getName());
-			parentProject.acceptVisitor(new DataPrinterVisitor());
+			parentProject.print();
+			//parentProject.acceptVisitor(new DataPrinterVisitor());
 			System.out.println();
 		}
 		assert invariant();
 	}
+	
+	public void display() {
+		if (!isRoot()) {
+			if (getStartDate() != null) {
+				System.out.println(
+					MessageFormat.format(
+						"{0}\t{1}\t{2}\t{3}",
+						getName(),
+						DateUtilities.getFormatter().format(
+								getStartDate().getTime()),
+						DateUtilities.getFormatter().format(
+								getEndDate().getTime()),
+						TimeFormatter.format(getDuration())
+					)
+				);
+			} else {
+				System.out.println(getName());
+			}
+		}
+	}
+	
+	public abstract void print();
 
 	/**
 	 * @uml.property name="duration"

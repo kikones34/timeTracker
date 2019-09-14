@@ -132,4 +132,9 @@ public class Task extends Work {
 		return intervals.size() > 0;
 	}
 
+	@Override
+	public void print() {
+		display();
+	}
+
 }
